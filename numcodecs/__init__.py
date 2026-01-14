@@ -53,6 +53,12 @@ blosc._init()
 blosc.set_nthreads(min(8, ncores))
 atexit.register(blosc._destroy)
 
+# Blosc2 codec (wraps python-blosc2, supports openh264)
+with suppress(ImportError):
+    from numcodecs.blosc2 import Blosc2
+
+    register_codec(Blosc2)
+
 from numcodecs import zstd as zstd
 from numcodecs.zstd import Zstd
 
